@@ -19,11 +19,13 @@
 
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import useAuth from "../hooks/useAuth";
 
 const CreatePostModal = (props: any) => {
     const [title,setTitle]=useState<string>("");
     const [description,setDescription]=useState<string>("");
     const [file, setFile] = useState(null);
+    const {user}=useAuth();
     const { open, setOpen } = props;
 
     const handleClose = () => {
@@ -34,22 +36,24 @@ const CreatePostModal = (props: any) => {
         setFile(e.target.files[0]);
     };
 
-    const handleSubmit = async (event:any) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+    
         if (file) {
             const reader = new FileReader();
-            reader.onload = async function(e:any){
-                const arrayBuffer = e.target.result;
-                const buffer = Buffer.from(arrayBuffer);
+            reader.onload = async function(e: ProgressEvent<FileReader>) {
+                const arrayBuffer = e.target?.result as ArrayBuffer;
+                const base64String = arrayBufferToBase64(arrayBuffer);
+    
                 const postData = {
                     title,
                     description,
-                    image: buffer.toString('base64'),  // Buffer'ı Base64 formatına çevir ve gönder
+                    image: base64String,  // Base64 formatında veriyi gönder
                 };
-
+    
                 try {
-                    console.log("Post data=",postData)
+                    console.log("Post data=", postData);
+                    // Burada postData ile API çağrısı yapabilirsiniz
                 } catch (error) {
                     console.error('Error uploading file:', error);
                 }
@@ -59,6 +63,18 @@ const CreatePostModal = (props: any) => {
             console.error('No file selected');
         }
     };
+    
+    // ArrayBuffer'ı Base64 formatına dönüştüren yardımcı fonksiyon
+    const arrayBufferToBase64 = (buffer: ArrayBuffer): string => {
+        const bytes = new Uint8Array(buffer);
+        let binary = '';
+        const len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+            binary += String.fromCharCode(bytes[i]);
+        }
+        return window.btoa(binary);
+    };
+    
 
     return (
         <>

@@ -161,16 +161,18 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
   };
 
   const register = async (email: string, password: string, username:string,city:string,party:string,politicalView:string,gender:string) => {
-    const id = chance.bb_pin();
-    const response = await axios.post(`${BASE_URL}/api/v1/auth/register`, { id, email, password, username,city,party,politicalView,gender});
+    const response = await axios.post(`${BASE_URL}/api/v1/auth/register`, {  email, password, username,city,party,politicalView,gender});
     let users = response.data;
+
+    console.log(users);
 
     if (window.localStorage.getItem('users')) {
       const localUsers = window.localStorage.getItem('users');
-      users = [...JSON.parse(localUsers!), { id, email, password, name: `${username} ${email}` }];
+      users = [...JSON.parse(localUsers!), { email, password, name: `${username} ${email}` }];
     }
 
     window.localStorage.setItem('users', JSON.stringify(users));
+    await login(email,password);
   };
 
   const logout = () => {
