@@ -1,0 +1,35 @@
+.message-outer {
+    height: 60vh;
+    overflow-y: auto; /* Yalnızca dikey kaydırma */
+    padding-right: 10px; /* Sağ tarafta kaydırma çubuğu için boşluk */
+}
+
+.message-body {
+    padding: 0;
+    margin: 0;
+}
+
+
+
+.my-message{
+    list-style: none;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 350px;
+    height: 70px;
+    background-color: purple;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.message{
+    list-style: none;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 350px;
+    height: 70px;
+    margin-left: 20%;
+    background-color: blue;
+    color: white;
+    margin-bottom: 15px;
+}
