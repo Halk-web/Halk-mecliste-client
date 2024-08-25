@@ -160,20 +160,38 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
     }
   };
 
-  const register = async (email: string, password: string, username:string,city:string,party:string,politicalView:string,gender:string) => {
-    const response = await axios.post(`${BASE_URL}/api/v1/auth/register`, {  email, password, username,city,party,politicalView,gender});
+  const register = async (email: string, password: string, username: string, city: string, party: string, politicalView: string, gender: string) => {
+    const response = await axios.post(`${BASE_URL}/api/v1/auth/register`, { email, password, username, city, party, politicalView, gender });
     let users = response.data;
 
     console.log(users);
 
-    if (window.localStorage.getItem('users')) {
-      const localUsers = window.localStorage.getItem('users');
-      users = [...JSON.parse(localUsers!), { email, password, name: `${username} ${email}` }];
+    // Retrieve and parse existing users from localStorage
+    const localUsersString = window.localStorage.getItem('users');
+    let localUsers: { email: string; password: string; name: string }[] = [];
+
+    if (localUsersString) {
+        try {
+            localUsers = JSON.parse(localUsersString);
+            if (!Array.isArray(localUsers)) {
+                throw new Error('Local users data is not an array');
+            }
+        } catch (error) {
+            console.error('Error parsing local users from localStorage:', error);
+            localUsers = [];
+        }
     }
 
+    // Add new user to the local users array
+    users = [...localUsers, { email, password, name: `${username} ${email}` }];
+
+    // Save updated users list to localStorage
     window.localStorage.setItem('users', JSON.stringify(users));
-    await login(email,password);
-  };
+
+    // Call login function
+    await login(email, password);
+};
+
 
   const logout = () => {
     setSession(null);
@@ -231,6 +249,13 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
     }
   };
 
+  const findOneById = async (userId: string) => {
+    const response = await axios.get(`${BASE_URL}/api/v1/auth/findOne/${userId}`);
+    const findUser = response.data;
+    return findUser;
+  };
+
+
   const updateProfile = () => {};
 
   if (state.isInitialized !== undefined && !state.isInitialized) {
@@ -238,7 +263,7 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
   }
 
   return (
-    <JWTContext.Provider value={{ ...state, login, logout, register, forgotPassword, resetPassword, updateProfile, verifyCode }}>
+    <JWTContext.Provider value={{ ...state, login, logout, register, findOneById,forgotPassword, resetPassword, updateProfile, verifyCode, }}>
       {children}
     </JWTContext.Provider>
   );

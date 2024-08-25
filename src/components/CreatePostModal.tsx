@@ -1,31 +1,18 @@
-//chatgbt mesaj önce bir ekrana yazdırayım dedim ama hata verdi
-// Uncaught runtime errors:
-// ERROR
-// Buffer is not defined
-// ./src/components/CreatePostModal.tsx/CreatePostModal/handleSubmit/reader.onload@http://localhost:3000/main.14672c490c34080fb467.hot-update.js:49:24
-// EventHandlerNonNull*handleSubmit@http://localhost:3000/main.14672c490c34080fb467.hot-update.js:47:7
-// callCallback@http://localhost:3000/static/js/bundle.js:47716:18
-// invokeGuardedCallbackDev@http://localhost:3000/static/js/bundle.js:47760:20
-// invokeGuardedCallback@http://localhost:3000/static/js/bundle.js:47817:35
-// invokeGuardedCallbackAndCatchFirstError@http://localhost:3000/static/js/bundle.js:47831:29
-// executeDispatch@http://localhost:3000/static/js/bundle.js:51974:46
-// processDispatchQueueItemsInOrder@http://localhost:3000/static/js/bundle.js:52000:26
-// processDispatchQueue@http://localhost:3000/static/js/bundle.js:52011:41
-// dispatchEventsForPlugins@http://localhost:3000/static/js/bundle.js:52020:27
-// ./node_modules/react-dom/cjs/react-dom.development.js/dispatchEventForPluginEventSystem/<@http://localhost:3000/static/js/bundle.js:52180:16
-// batchedUpdates$1@http://localhost:3000/static/js/bundle.js:66598:16
-// batchedUpdates@http://localhost:3000/static/js/bundle.js:47564:16
-// dispatchEventForPluginEventSystem@http://localhost:3000/static/js/bundl
 
 import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import useAuth from "../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { createPostThunk } from "../store/Thunk/PostThunk";
+import { useNavigate } from "react-router-dom";
 
 const CreatePostModal = (props: any) => {
     const [title,setTitle]=useState<string>("");
     const [description,setDescription]=useState<string>("");
     const [file, setFile] = useState(null);
     const {user}=useAuth();
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
     const { open, setOpen } = props;
 
     const handleClose = () => {
@@ -44,25 +31,30 @@ const CreatePostModal = (props: any) => {
             reader.onload = async function(e: ProgressEvent<FileReader>) {
                 const arrayBuffer = e.target?.result as ArrayBuffer;
                 const base64String = arrayBufferToBase64(arrayBuffer);
+                console.log("Loggined user=",user);
     
                 const postData = {
                     title,
                     description,
-                    image: base64String,  // Base64 formatında veriyi gönder
+                    image: base64String,
+                    profile_id:user?.profile.id
                 };
     
                 try {
                     console.log("Post data=", postData);
-                    // Burada postData ile API çağrısı yapabilirsiniz
+                    const new_post = await dispatch(createPostThunk(postData) as any);
+                    setOpen(false);
+                    alert("Oturum başarıyla oluşturuldu!");
                 } catch (error) {
                     console.error('Error uploading file:', error);
                 }
             };
-            reader.readAsArrayBuffer(file);  // Dosyayı ArrayBuffer olarak oku
+            reader.readAsArrayBuffer(file);
         } else {
             console.error('No file selected');
         }
     };
+    
     
     // ArrayBuffer'ı Base64 formatına dönüştüren yardımcı fonksiyon
     const arrayBufferToBase64 = (buffer: ArrayBuffer): string => {

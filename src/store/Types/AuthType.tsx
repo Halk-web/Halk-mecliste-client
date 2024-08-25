@@ -14,6 +14,7 @@ export type UserProfile = {
   politicalView:string;
   city?:string;
   party?:string;
+  profile?:any;
   createdAt?: string;
   updatedAt?: string;
   deletedAt?: string | null;
@@ -23,6 +24,7 @@ export interface AuthProps {
   isLoggedIn: boolean;
   isInitialized?: boolean;
   user?: UserProfile | null;
+  findUser?:null;
   token?: string | null;
   email?: string | null;
   verified?: boolean | null;
@@ -52,6 +54,7 @@ export type JWTContextType = {
   logout: () => void;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, username:string,city:string,party:string,politicalView:string,gender:string) => Promise<void>;
+  findOneById:(userId:string)=>Promise<void>;
   forgotPassword: (email: string) => Promise<[boolean, string?]>;
   resetPassword: (email: string) => Promise<[boolean, string?]>;
   updateProfile: VoidFunction;

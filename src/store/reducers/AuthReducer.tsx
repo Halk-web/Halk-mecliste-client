@@ -1,19 +1,14 @@
-// action - state management
+// reducers/AuthReducer.ts
 import { REGISTER, LOGIN, LOGOUT, FORGOT_PASSWORD, ISLOGGEDIN } from '../Actions/AuthAction';
-
-// types
 import { AuthProps, AuthActionProps } from '../Types/AuthType';
 
-// initial state
-export const initialState: AuthProps = {
+const initialState: AuthProps = {
   isLoggedIn: false,
   isInitialized: false,
   user: null
 };
 
-// ==============================|| AUTH REDUCER ||============================== //
-
-const auth = (state = initialState, action: AuthActionProps) => {
+const authReducer = (state = initialState, action: AuthActionProps) => {
   switch (action.type) {
     case REGISTER: {
       const { user } = action.payload!;
@@ -39,7 +34,6 @@ const auth = (state = initialState, action: AuthActionProps) => {
       };
     }
     case LOGOUT: {
-      // Socket yapısı gelince revize edilebilir.
       localStorage.removeItem('serviceToken');
       localStorage.removeItem('refreshToken');
       return {
@@ -65,4 +59,4 @@ const auth = (state = initialState, action: AuthActionProps) => {
   }
 };
 
-export default auth;
+export default authReducer;

@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import authReducer from './reducers/AuthReducer';
-import ChartReducer from './reducers/ChartReducer';
+import PostReducer from './reducers/PostReducer';
 
 const rootReducer = combineReducers({
   auth:authReducer,
-  chart:ChartReducer
+  post:PostReducer
 });
 
 const store = configureStore({
