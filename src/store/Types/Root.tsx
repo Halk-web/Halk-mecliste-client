@@ -1,10 +1,4 @@
 import { ComponentClass, FunctionComponent } from 'react';
-
-// material-ui
-import { SvgIconTypeMap } from '@mui/material';
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-
-// third-party
 import { Icon } from 'iconsax-react';
 
 // ==============================|| TYPES - ROOT  ||============================== //
@@ -13,13 +7,11 @@ export type KeyedObject = {
   [key: string]: string | number | KeyedObject | any;
 };
 
+// `OverrideIcon` türü sadece React bileşenleri ve third-party ikon bileşenlerini destekler
 export type OverrideIcon =
-  | (OverridableComponent<SvgIconTypeMap<{}, 'svg'>> & {
-      muiName: string;
-    })
-  | ComponentClass<any>
-  | FunctionComponent<any>
-  | Icon;
+  | ComponentClass<any> // React class bileşenleri
+  | FunctionComponent<any> // React fonksiyon bileşenleri
+  | Icon; // third-party ikon bileşenleri
 
 export interface GenericCardProps {
   title?: string;
