@@ -1,65 +1,73 @@
-import { ReactElement } from 'react';
+  import { ReactElement } from 'react';
 
-// ==============================|| TYPES - AUTH  ||============================== //
+  // ==============================|| TYPES - AUTH  ||============================== //
 
-export type GuardProps = {
-  children: ReactElement | null;
-};
+  export type GuardProps = {
+    children: ReactElement | null;
+  };
 
-export type UserProfile = {
-  id?: string;
-  username?: string;
-  email?:string;
-  gender?:string;
-  politicalView:string;
-  city?:string;
-  party?:string;
-  profile?:any;
-  createdAt?: string;
-  updatedAt?: string;
-  deletedAt?: string | null;
-};
+  export type ProfileProps={
+    id:string;
+    profile_img?:string;
+    gender?:string;
+    politicalView:string;
+    city?:string;
+    party?:string;
+  }
 
-export interface AuthProps {
-  isLoggedIn: boolean;
-  isInitialized?: boolean;
-  user?: UserProfile | null;
-  findUser?:null;
-  token?: string | null;
-  email?: string | null;
-  verified?: boolean | null;
-}
+  export type UserProfile = {
+    id?: string;
+    username?: string;
+    email?:string;
+    numberOfPosts?:number;
+    profile:ProfileProps;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string | null;
+  };
 
-export interface AuthActionProps {
-  type: string;
-  payload?: AuthProps;
-}
+  export interface AuthProps {
+    isLoggedIn: boolean;
+    isInitialized?: boolean;
+    user?: UserProfile | null;
+    findUser?:null;
+    token?: string | null;
+    email?: string | null;
+    verified?: boolean | null;
+  }
 
-export interface InitialLoginContextProps {
-  isLoggedIn: boolean;
-  isInitialized?: boolean;
-  user?: UserProfile | null | undefined;
-}
+  export interface AuthActionProps {
+    type: string;
+    payload?: AuthProps;
+  }
 
-export interface JWTDataProps {
-  userId: string;
-}
+  export interface InitialLoginContextProps {
+    isLoggedIn: boolean;
+    isInitialized?: boolean;
+    user?: UserProfile | null | undefined;
+  }
 
-export type JWTContextType = {
-  isLoggedIn: boolean;
-  isInitialized?: boolean;
-  user?: UserProfile | null | undefined;
-  token?: string | null;
-  email?: string | null;
-  logout: () => void;
-  login: (email: string, password: string) => Promise<void>;
-  register: (email: string, password: string, username:string,city:string,party:string,politicalView:string,gender:string) => Promise<void>;
-  findOneById:(userId:string)=>Promise<void>;
-  forgotPassword: (email: string) => Promise<[boolean, string?]>;
-  resetPassword: (email: string) => Promise<[boolean, string?]>;
-  updateProfile: VoidFunction;
-  verifyCode: (code: string) => Promise<[boolean, string?]>;
-};
+  export interface JWTDataProps {
+    userId: string;
+  }
+
+  export type JWTContextType = {
+    isLoggedIn: boolean;
+    isInitialized?: boolean;
+    user?: UserProfile | null | undefined;
+    token?: string | null;
+    email?: string | null;
+    logout: () => void;
+    login: (email: string, password: string) => Promise<void>;
+    register: (email: string, password: string, username:string,city:string,party:string,politicalView:string,gender:string) => Promise<void>;
+    findOneById:(userId:string)=>Promise<UserProfile|null>;
+    updateOneUserById:(id:string,userData:any)=>Promise<any|null>;
+    findAll:()=>Promise<UserProfile[]|null>;
+    forgotPassword: (email: string) => Promise<[boolean, string?]>;
+    resetPassword: (email: string) => Promise<[boolean, string?]>;
+    updateProfile: VoidFunction;
+    verifyCode: (code: string) => Promise<[boolean, string?]>;
+  };
 
 
 

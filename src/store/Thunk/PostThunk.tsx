@@ -1,28 +1,30 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../utils/axios";
 
-interface CreatePostDto{
-    title:string;
-    description:string;
-    image?:string;
-    profile_id:any;
-    liked_by?:any;
-    disliked_by?:any;
+interface CreatePostDto {
+    title: string;
+    description: string;
+    image?: string;
+    profile_id: any;
+    liked_by?: any;
+    disliked_by?: any;
 }
 
-interface PostDto{
-    id?:string;
-    title:string;
-    description:string;
-    image?:string;
-    profile_id:any;
-    profile?:any;
-    liked_by?:any;
-    disliked_by?:any
+// PostDto interface
+interface PostDto {
+    id?: string;
+    title: string;
+    description: string;
+    image?: string;
+    profile_id: any;
+    profile?: any;
+    liked_by?: any;
+    disliked_by?: any;
 }
 
-interface PostError{
-    message:string;
+// PostError interface
+interface PostError {
+    message: string;
 }
 
 export const createPostThunk=createAsyncThunk<PostDto,CreatePostDto,{rejectValue:PostError}>("/post/create",
@@ -36,7 +38,7 @@ export const createPostThunk=createAsyncThunk<PostDto,CreatePostDto,{rejectValue
             if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
-            return rejectWithValue({ message: 'Bilinmeyen bir hata oluştu.' });
+            return rejectWithValue({ message: 'There is an unknown error!' });
         }
     }
 );
@@ -51,12 +53,12 @@ export const findAllThunk=createAsyncThunk<PostDto[],void,{rejectValue:PostError
             if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
-            return rejectWithValue({ message: 'Bilinmeyen bir hata oluştu.' });
+            return rejectWithValue({ message: 'There is an unknown error!' });
         }
     }
 );
 
-export const findOneById=createAsyncThunk<PostDto,string,{rejectValue:PostError}>("/post/findOne",
+export const findOneByIdThunk=createAsyncThunk<PostDto,string,{rejectValue:PostError}>("/post/findOne",
     async (id,{rejectWithValue})=>{
         try{
             const response=await axios.get(`/post/findOne/${id}`);
@@ -66,10 +68,42 @@ export const findOneById=createAsyncThunk<PostDto,string,{rejectValue:PostError}
             if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
-            return rejectWithValue({ message: 'Bilinmeyen bir hata oluştu.' });
+            return rejectWithValue({ message: 'There is an unknown error!' });
         }
     }
 );
+
+export const findByProfileIdThunk=createAsyncThunk<PostDto,string,{rejectValue:PostError}>("/post/findByProfileIdThunk",
+    async (profile_id,{rejectWithValue})=>{
+        try{
+            const response=await axios.get(`/post/findByProfileId/${profile_id}`);
+            return response.data;
+        }
+        catch(error:any){
+            if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue({ message: 'There is an unknown error!' });
+        }
+    }
+);
+
+export const searchPostThunk=createAsyncThunk<PostDto,string,{rejectValue:PostError}>("/post/findOne",
+    async (title,{rejectWithValue})=>{
+        try{
+            const response=await axios.get(`/post/search/${title}`);
+            return response.data;
+        }
+        catch(error:any){
+            if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            }
+            return rejectWithValue({ message: 'There is an unknown error!' });
+        }
+    }
+);
+
+
 
 export const DeletePostThunk = createAsyncThunk<PostDto, string, { rejectValue: PostError}>(
     'post/delete',
@@ -81,7 +115,7 @@ export const DeletePostThunk = createAsyncThunk<PostDto, string, { rejectValue: 
             if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
-            return rejectWithValue({ message: 'Bilinmeyen bir hata oluştu.' });
+            return rejectWithValue({ message: 'There is an unknown error!' });
         }
     }
 );
@@ -97,7 +131,7 @@ export const LikePostThunk = createAsyncThunk<PostDto, { post_id: string, profil
             if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
-            return rejectWithValue({ message: 'Bilinmeyen bir hata oluştu.' });
+            return rejectWithValue({ message: 'There is an unknown error!' });
         }
     }
 );
@@ -113,7 +147,7 @@ export const DislikePostThunk = createAsyncThunk<PostDto, { post_id: string, pro
             if (error.response && error.response.data) {
                 return rejectWithValue(error.response.data);
             }
-            return rejectWithValue({ message: 'Bilinmeyen bir hata oluştu.' });
+            return rejectWithValue({ message: 'There is an unknown error!' });
         }
     }
 );

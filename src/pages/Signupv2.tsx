@@ -6,26 +6,9 @@ import { useEffect, useState } from "react";
 import { useLocation ,useNavigate} from "react-router-dom";
 import "../styles/login.css";
 import useAuth from "../hooks/useAuth";
-
-const cities = [
-    "Adana", "Adıyaman", "Afyonkarahisar", "Ağrı", "Amasya", "Ankara", "Antalya", "Artvin", "Aydın", "Balıkesir", 
-    "Bilecik", "Bingöl", "Bitlis", "Bolu", "Burdur", "Bursa", "Çanakkale", "Çankırı", "Çorum", "Denizli", 
-    "Diyarbakır", "Edirne", "Elazığ", "Erzincan", "Erzurum", "Eskişehir", "Gaziantep", "Giresun", "Gümüşhane", 
-    "Hakkâri", "Hatay", "Isparta", "Mersin", "İstanbul", "İzmir", "Kars", "Kastamonu", "Kayseri", "Kırklareli", 
-    "Kırşehir", "Kocaeli", "Konya", "Kütahya", "Malatya", "Manisa", "Kahramanmaraş", "Mardin", "Muğla", "Muş", 
-    "Nevşehir", "Niğde", "Ordu", "Rize", "Sakarya", "Samsun", "Siirt", "Sinop", "Sivas", "Tekirdağ", "Tokat", 
-    "Trabzon", "Tunceli", "Şanlıurfa", "Uşak", "Van", "Yozgat", "Zonguldak", "Aksaray", "Bayburt", "Karaman", 
-    "Kırıkkale", "Batman", "Şırnak", "Bartın", "Ardahan", "Iğdır", "Yalova", "Karabük", "Kilis", "Osmaniye", 
-    "Düzce"
-];
-
-const politicalViews = [
-    "Liberal", "Komünist", "İslamcı", "Atatürkçü", "Muhafazakâr", "Sosyal Demokrat", "Milliyetçi", "Feminist","Tarafsız"
-];
-
-const parties=[
-    "AKP","CHP","MHP","İYİ PARTİ","SAADET PARTİSİ","DEM PARTİ","tarfsız"
-]
+import { cities } from "../consts/cities";
+import { parties } from "../consts/parties";
+import { politicalViews } from "../consts/politicalViews";
 
 const SignupV2 = () => {
     const [city, setCity] = useState<string>("");
@@ -36,11 +19,7 @@ const SignupV2 = () => {
     const location = useLocation();
     const {register,login}=useAuth();
     const navigate=useNavigate();
-
-    useEffect(() => {
-        console.log(location.state);
-    }, [location.state]);
-
+    
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
         if (!city || !politicalView || !gender) {

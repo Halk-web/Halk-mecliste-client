@@ -1,0 +1,19 @@
+.custom-modal .modal-dialog {
+    max-width: 90%;
+    margin: 1.75rem auto;
+}
+
+.custom-modal .modal-body {
+    padding: 20px;
+}
+
+@media (max-width: 768px) {
+    .custom-modal .modal-dialog {
+        max-width: 100%;
+        margin: 0;
+    }
+
+    .custom-modal .modal-body {
+        padding: 10px;
+    }
+}

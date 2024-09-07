@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { createPostThunk, DeletePostThunk, DislikePostThunk, findAllThunk, findOneById, LikePostThunk } from "../Thunk/PostThunk";
+import { createPostThunk, DeletePostThunk, DislikePostThunk, findAllThunk, findByProfileIdThunk, findOneByIdThunk, LikePostThunk } from "../Thunk/PostThunk";
 
 interface PostState {
     loading: boolean;
@@ -26,6 +26,7 @@ const postReducer = createSlice({
             state.error = action.payload.message;
         })
         .addCase(createPostThunk.fulfilled, (state, action: PayloadAction<any>) => {
+            console.log("Action payload=",action.payload);
             state.posts.push(action.payload);
             state.loading = false;
         })
@@ -47,15 +48,28 @@ const postReducer = createSlice({
             state.error = null;
         })
 
-        .addCase(findOneById.rejected, (state, action: PayloadAction<any>) => {
+        .addCase(findOneByIdThunk.rejected, (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.error = action.payload.message;
         })
-        .addCase(findOneById.fulfilled, (state, action: PayloadAction<any>) => {
+        .addCase(findOneByIdThunk.fulfilled, (state, action: PayloadAction<any>) => {
             state.post = action.payload;
             state.loading = false;
         })
-        .addCase(findOneById.pending, (state) => {
+        .addCase(findOneByIdThunk.pending, (state) => {
+            state.loading = true;
+            state.error = null;
+        })
+
+        .addCase(findByProfileIdThunk.rejected, (state, action: PayloadAction<any>) => {
+            state.loading = false;
+            state.error = action.payload.message;
+        })
+        .addCase(findByProfileIdThunk.fulfilled, (state, action: PayloadAction<any>) => {
+            state.loading = false;
+            state.posts = action.payload;
+        })
+        .addCase(findByProfileIdThunk.pending, (state) => {
             state.loading = true;
             state.error = null;
         })

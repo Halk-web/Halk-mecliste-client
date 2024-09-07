@@ -5,37 +5,51 @@ import SimpleBar from "simplebar-react";
 import "../styles/Navbar.css";
 import CreatePostModal from "./CreatePostModal";
 import useAuth from "../hooks/useAuth";
+import { searchPostThunk } from "../store/Thunk/PostThunk";
+import { useNavigate } from "react-router-dom";
 
 
 const TopBar = () => {
     const [open,setOpen]=useState<boolean>(false);
-    const {logout}=useAuth();
+    const [search,setSearch]=useState("");
+    const {logout,user}=useAuth();
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
 
     const handleLogout=(e:any)=>{
         logout();
     }
+
+    const handleOnChange=(e:any)=>{
+        setSearch(e.target.value);
+    }
+
+    const handleOnClick=async()=>{
+        const searched_posts=await dispatch(searchPostThunk(search) as any);
+        navigate("/home/search",{state:searched_posts});
+    }
    
     return (
         <React.Fragment>
-            <header className="pc-header" style={{ position: "fixed", top: 0, left: 0, right: 0 }}>
+            <header className="pc-header" style={{ position: "fixed", top: 0, left: 0, right: 0 ,backgroundColor:"beige"}}>
                 <div className="header-wrapper">
                     <div className="me-auto pc-mob-drp">
                         <ul className="list-unstyled">
                             <li className="pc-h-item pc-sidebar-collapse">
                                <h4 style={{ marginRight: "25px" }}>
-                                    HALK MECLISTE<h6><small>yasamız var</small></h6>
+                                    HALK MECLISTE<h6><small>Neyin nesi Halkın Sesi</small></h6>
                                 </h4>
                             </li>
                             <Dropdown as="li" className="pc-h-item d-inline-flex d-md-none">
-                                <Dropdown.Toggle as="a" className="pc-head-link arrow-none m-0" data-bs-toggle="dropdown" href="#" role="button"
+                                <Dropdown.Toggle as="a" className="pc-head-link arrow-none m-0" data-bs-toggle="dropdown" role="button" style={{textDecoration:"none"}}
                                     aria-haspopup="false" aria-expanded="false">
                                     <i className="ph-duotone ph-magnifying-glass"></i>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu className="pc-h-dropdown drp-search">
                                     <form className="px-3">
                                         <div className="form-group mb-0 d-flex align-items-center">
-                                            <input type="search" className="form-control border-0 shadow-none" placeholder="Search here. . ." />
-                                            <button className="btn btn-light-secondary btn-search">Search</button>
+                                            <input type="search" className="form-control border-0 shadow-none" placeholder="OTURUM ARA. . ." onChange={e=>{handleOnChange(e)}}/>
+                                            <a className="btn btn-light-secondary btn-search" onClick={(e:any)=>handleOnClick()}>ARA</a>
                                         </div>
                                     </form>
                                 </Dropdown.Menu>
@@ -43,8 +57,8 @@ const TopBar = () => {
                             <li className="pc-h-item d-none d-md-inline-flex">
                                 <form className="form-search">
                                     <i className="ph-duotone ph-magnifying-glass icon-search"></i>
-                                    <input type="search" className="form-control" placeholder="Tasarı Ara..." />
-                                    <button className="btn btn-search" style={{ padding: "0" }}><kbd>ctrl+k</kbd></button>
+                                    <input type="search" className="form-control" placeholder="OTURUM Ara..." onChange={e=>{handleOnChange(e)}} />
+                                    <a className="btn btn-search" style={{ padding: "0" }} onClick={(e:any)=>handleOnClick()}>ARA</a>
                                 </form>
                             </li>
                         </ul>
@@ -53,7 +67,7 @@ const TopBar = () => {
                     <div className="ms-auto">
                         <ul className="list-unstyled">
                             <Dropdown as="li" className="dropdown pc-h-item d-none d-md-inline-flex">
-                                <Dropdown.Toggle as="a" className="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
+                                <Dropdown.Toggle as="a" className="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown"role="button" style={{textDecoration:"none"}}
                                     aria-haspopup="false" aria-expanded="false">
                                     <i className="ph-duotone ph-circles-four"></i>
                                 </Dropdown.Toggle>
@@ -61,29 +75,20 @@ const TopBar = () => {
                                     <div className="overflow-hidden">
                                         <div className="qta-links m-n1">
                                             <Dropdown.Item href="/" className="dropdown-item">
-                                                <i className="ph-duotone ph-lifebuoy"></i>
+                                                <i className="ph-duotone ph-house"></i>
                                                 <span>Ana Sayfa</span>
                                             </Dropdown.Item>
                                             <Dropdown.Item onClick={(e:any)=>{setOpen(true)}} className="dropdown-item">
-                                                <i className="ph-duotone ph-lifebuoy"></i>
+                                                <i className="ph-duotone ph-sign-in"></i>
                                                 <span>Oturum başlat</span>
                                             </Dropdown.Item>
-                                            <Dropdown.Item href="/profile" className="dropdown-item">
-                                                <i className="ph-duotone ph-scroll"></i>
+                                            <Dropdown.Item href={`/profile/${user?.id}`} className="dropdown-item">
+                                                <i className="ph-duotone ph-user"></i>
                                                 <span>Profilim</span>
                                             </Dropdown.Item>
 
-                                            <Dropdown.Item href="/" className="dropdown-item">
-                                                <i className="ph-duotone ph-identification-badge"></i>
-                                                <span>Siyasi Ortaklarım</span>
-                                            </Dropdown.Item>
-                                            <Dropdown.Item href="#!" className="dropdown-item">
-                                                <i className="ph-duotone ph-chats-circle"></i>
-                                                <span>Sohbetlerim</span>
-                                            </Dropdown.Item>
-
-                                            <Dropdown.Item href="#!" className="dropdown-item">
-                                                <i className="ph-duotone ph-user-circle"></i>
+                                            <Dropdown.Item href="/users" className="dropdown-item">
+                                                <i className="ph-duotone ph-users-three"></i>
                                                 <span>Kullanıcılar</span>
                                             </Dropdown.Item>
                                         </div>
@@ -91,30 +96,34 @@ const TopBar = () => {
                                 </Dropdown.Menu>
                             </Dropdown>
                             <li className="pc-h-item">
-                                <a className="pc-head-link pct-c-btn" href="#" data-bs-toggle="offcanvas" data-bs-target="#offcanvas_pc_layout">
+                                <a className="pc-head-link pct-c-btn" href={`/profile/${user?.id}`} data-bs-toggle="offcanvas" data-bs-target="#offcanvas_pc_layout" style={{textDecoration:"none"}}>
                                     <i className="ph-duotone ph-gear-six"></i>
                                 </a>
                             </li>
                             <Dropdown as="li" className="pc-h-item">
-                                <Dropdown.Toggle as="a" className="pc-head-link arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button"
+                                <Dropdown.Toggle as="a" className="pc-head-link arrow-none me-0" data-bs-toggle="dropdown" role="button" style={{textDecoration:"none"}}
                                     aria-haspopup="false" aria-expanded="false">
                                     <i className="ph-duotone ph-diamonds-four"></i>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu className="dropdown-menu-end pc-h-dropdown">
                                    <Dropdown.Item href="/">
-                                    <i className="ph-duotone ph-gear"></i>
+                                    <i className="ph-duotone ph-house"></i>
                                         <span>Ana sayfa</span>
                                     </Dropdown.Item>
-                                    <Dropdown.Item href="/profile">
+                                    <Dropdown.Item href="/">
+                                        <i className="ph-duotone ph-buildings"></i>
+                                        <span>Meclis</span>
+                                    </Dropdown.Item>
+                                    <Dropdown.Item href={`/profile/${user?.id}`}>
                                     <i className="ph-duotone ph-gear"></i>
                                         <span>Profilim</span>
                                     </Dropdown.Item>
-                                    <Dropdown.Item href="/">
-                                        <i className="ph-duotone ph-user"></i>
-                                        <span>Meclis</span>
+                                    <Dropdown.Item href="/users">
+                                        <i className="ph-duotone ph-users-three"></i>
+                                        <span>Kullanıcılar</span>
                                     </Dropdown.Item>
                                     <Dropdown.Item onClick={(e:any)=>{setOpen(true)}} >
-                                        <i className="ph-duotone ph-lock-key"></i>
+                                        <i className="ph-duotone ph-sign-in"></i>
                                         <span>Oturum oluştur</span>
                                     </Dropdown.Item>
                                     <Dropdown.Item onClick={(e:any)=>{handleLogout(e)}}>
@@ -125,7 +134,7 @@ const TopBar = () => {
                             </Dropdown>
                             
                             <Dropdown as="li" className="pc-h-item header-user-profile">
-                                <Dropdown.Toggle className="pc-head-link arrow-none me-0" data-bs-toggle="dropdown" href="#"
+                                <Dropdown.Toggle className="pc-head-link arrow-none me-0" data-bs-toggle="dropdown"
                                     aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false" style={{ border: "none" }}>
                                                               </Dropdown.Toggle>
                                 <Dropdown.Menu className="dropdown-user-profile dropdown-menu-end pc-h-dropdown">
@@ -268,6 +277,7 @@ const TopBar = () => {
                 </div>
             </header>
             <CreatePostModal open={open} setOpen={setOpen}></CreatePostModal>
+            
         </React.Fragment>
     );
 };

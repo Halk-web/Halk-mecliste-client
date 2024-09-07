@@ -11,7 +11,7 @@ import authReducer from '../store/reducers/AuthReducer';
 import Loading from '../pages/loading';
 import axios, { BASE_URL } from '../utils/axios';
 import { KeyedObject } from '../store/Types/Root';
-import { AuthProps, JWTContextType } from '../store/Types/AuthType';
+import { AuthProps, JWTContextType, UserProfile } from '../store/Types/AuthType';
 
 const chance = new Chance();
 
@@ -164,8 +164,6 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
     const response = await axios.post(`${BASE_URL}/api/v1/auth/register`, { email, password, username, city, party, politicalView, gender });
     let users = response.data;
 
-    console.log(users);
-
     // Retrieve and parse existing users from localStorage
     const localUsersString = window.localStorage.getItem('users');
     let localUsers: { email: string; password: string; name: string }[] = [];
@@ -249,11 +247,23 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
     }
   };
 
-  const findOneById = async (userId: string) => {
+  const findOneById = async (userId: string): Promise<UserProfile | null> => {
     const response = await axios.get(`${BASE_URL}/api/v1/auth/findOne/${userId}`);
     const findUser = response.data;
     return findUser;
   };
+
+  const updateOneUserById = async (id: string,userData:any): Promise<UserProfile | null> => {
+    const response = await axios.put(`${BASE_URL}/api/v1/auth/update/${id}`,userData);
+    const updatedUser = response.data;
+    return updatedUser;
+  };
+
+  const findAll=async():Promise<UserProfile[]|null>=>{
+    const response=await axios.get(`${BASE_URL}/api/v1/auth/findAll`);
+    const data=response.data;
+    return data;
+  }
 
 
   const updateProfile = () => {};
@@ -263,7 +273,7 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
   }
 
   return (
-    <JWTContext.Provider value={{ ...state, login, logout, register, findOneById,forgotPassword, resetPassword, updateProfile, verifyCode, }}>
+    <JWTContext.Provider value={{ ...state, login, logout, register, findOneById,updateOneUserById ,findAll,forgotPassword,resetPassword, updateProfile, verifyCode, }}>
       {children}
     </JWTContext.Provider>
   );
