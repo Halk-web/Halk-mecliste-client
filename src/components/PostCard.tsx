@@ -55,7 +55,6 @@ const PostCard = (props: any) => {
       const userData = await findOneById(userId);
       setPostUser(userData);
     } catch (error) {
-      console.error('Error fetching user data:', error);
     }
   }, [profile.user_id, findOneById]);
 
@@ -130,7 +129,7 @@ const PostCard = (props: any) => {
             setDisliked(true);
         }
     } catch (error) {
-        console.error('Error liking post:', error);
+        
     }
     finally{
       setLoading(false);
@@ -163,7 +162,7 @@ const handleDislike = async () => {
             
         }
     } catch (error) {
-        console.error('Error disliking post:', error);
+
     }
     finally{
       setLoading(false);
@@ -177,7 +176,6 @@ const deleteMessagesByPostId = async (postId: string) => {
     const messageRef = database.ref(`messages/${postId}`);
     await messageRef.remove();
   } catch (error) {
-    console.error("Mesajlar silinirken hata oluştu:", error);
   }
 };
 
@@ -193,7 +191,6 @@ const handleDelete = async () => {
       await deleteMessagesByPostId(id);
     }
   } catch (error) {
-    console.error('Error deleting post:', error);
   }
 };
 

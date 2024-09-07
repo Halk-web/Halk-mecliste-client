@@ -45,7 +45,7 @@ const CreatePostModal = (props: any) => {
                     addPost({...new_post.payload,liked_by:[],disliked_by:[],profile:user?.profile});
                     setOpen(false); // Başarılı olduysa modalı kapat
                 } catch (error) {
-                    console.error('Error uploading file:', error);
+                   
                 }
             };
             reader.readAsArrayBuffer(file);
@@ -58,7 +58,6 @@ const CreatePostModal = (props: any) => {
                 addPost({...new_post.payload,liked_by:[],disliked_by:[],profile:user?.profile});
                 setOpen(false);
             } catch (error) {
-                console.error('Error uploading post:', error);
             }
         }
     };

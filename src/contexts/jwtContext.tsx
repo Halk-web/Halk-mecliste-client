@@ -175,7 +175,6 @@ export const JWTProvider = ({ children }: { children: ReactElement }) => {
                 throw new Error('Local users data is not an array');
             }
         } catch (error) {
-            console.error('Error parsing local users from localStorage:', error);
             localUsers = [];
         }
     }
