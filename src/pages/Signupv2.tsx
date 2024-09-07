@@ -42,7 +42,6 @@ const SignupV2 = () => {
             
             }
             catch(err){
-                console.log(err);
                 setErr("Kullanıcı kaydedilirken hata oluştu!");;
             }
         }

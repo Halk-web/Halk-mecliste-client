@@ -12,17 +12,14 @@ const SignupV1 = () => {
     const navigate = useNavigate();
 
     const handleOnChangeUsername = (text: string) => {
-        console.log(text);
         setUsername(text);
     };
 
     const handleOnChangeEmail = (text: string) => {
-        console.log(text);
         setEmail(text);
     };
 
     const handleOnChangePassword = (text: string) => {
-        console.log(text);
         setPassword(text);
     };
 

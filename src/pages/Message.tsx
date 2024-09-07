@@ -111,7 +111,6 @@ const Message = () => {
         try {
             const messageRef = database.ref(`messages/${postId}/${messageId}`);
             await messageRef.remove();
-            console.log(`Message with ID ${messageId} deleted successfully`);
         } catch (error) {
             console.error("Failed to delete message:", error);
         }

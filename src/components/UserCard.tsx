@@ -12,7 +12,6 @@ const UserCards = () => {
         const fetchAllUsers = async () => {
             const allUsers = await findAll();
             if (allUsers) {
-                console.log("all users=", allUsers);
                 setUsers(allUsers);
             }
         };

@@ -6,7 +6,6 @@ export const PostProvider = ({ children }:any) => {
     const [fetchedPosts, setFetchedPosts] = useState<any[]>([]);
 
     const addPost = (newPost: any) => {
-        console.log("new post=",newPost);
         setFetchedPosts(prevPosts => [...prevPosts,newPost]);
     };
 

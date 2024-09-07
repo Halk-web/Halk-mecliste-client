@@ -87,7 +87,6 @@ const ProfilePage = () => {
     }
   
     try {
-      console.log("UserInfo is here=",userInfo);
       const updatedProfile = await dispatch(updateProfileThunk({ ...userInfo, id: profileId }) as any);
       setIsEditing({
         name: false,
@@ -98,7 +97,6 @@ const ProfilePage = () => {
         profile_img: false,
       });
       setIsChanged(false);
-      console.log("User profile updated successfully!");
     } catch (error) {
       console.error("Error updating profile:", error);
     }

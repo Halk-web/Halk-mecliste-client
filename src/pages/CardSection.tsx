@@ -29,7 +29,6 @@ const CardSection = (props: any) => {
         const fetchPostByProfileId = async () => {
             if (profile_id) {
                 const posts = await dispatch(findByProfileIdThunk(profile_id) as any);
-                console.log("fetched posts of profile=", posts);
                 setFetchedPosts((prevPosts: any) => {
                     const newPosts = posts.payload;
                     const uniquePosts = newPosts.filter((newPost: any) =>

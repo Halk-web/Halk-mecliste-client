@@ -50,7 +50,6 @@ const PostCard = (props: any) => {
 
     const fetchData = useMemo(async () => {
     const userId = profile.user_id;
-    console.log("props post=", props.post);
 
     try {
       const userData = await findOneById(userId);
@@ -113,9 +112,6 @@ const PostCard = (props: any) => {
     if (!user?.profile.id) return;
 
     setLoading(true);
-
-    console.log("Liked here=",liked);
-    console.log("disliked here=",disliked);
     try {
         if (!liked) {
             if (disliked) {
@@ -180,7 +176,6 @@ const deleteMessagesByPostId = async (postId: string) => {
   try {
     const messageRef = database.ref(`messages/${postId}`);
     await messageRef.remove();
-    console.log(`Post ID ${postId} ile ilişkili tüm mesajlar başarıyla silindi.`);
   } catch (error) {
     console.error("Mesajlar silinirken hata oluştu:", error);
   }
