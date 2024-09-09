@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation ,useNavigate} from "react-router-dom";
 import "../styles/login.css";
 import useAuth from "../hooks/useAuth";
- const [loading, setLoading] = useState<boolean>(false); 
 import { cities } from "../consts/cities";
 import { parties } from "../consts/parties";
 import { politicalViews } from "../consts/politicalViews";
@@ -10,6 +9,7 @@ import { politicalViews } from "../consts/politicalViews";
 const SignupV2 = () => {
     const [city, setCity] = useState<string>("");
     const [politicalView, setPoliticalView] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(false); 
     const [party, setParty] = useState<string>("");
     const [gender, setGender] = useState<string>("");
     const [err, setErr] = useState<string | null>(null);
