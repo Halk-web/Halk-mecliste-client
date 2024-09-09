@@ -1,11 +1,8 @@
-
-//chatgbt mesaj=
-//register ile kayıt olmaya çalışırken hata alıyorum
-
 import { useEffect, useState } from "react";
 import { useLocation ,useNavigate} from "react-router-dom";
 import "../styles/login.css";
 import useAuth from "../hooks/useAuth";
+ const [loading, setLoading] = useState<boolean>(false); 
 import { cities } from "../consts/cities";
 import { parties } from "../consts/parties";
 import { politicalViews } from "../consts/politicalViews";
@@ -22,6 +19,7 @@ const SignupV2 = () => {
     
     const handleSubmit = async(e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         if (!city || !politicalView || !gender) {
             setErr("Lütfen tüm alanları doldurunuz!");
         } else {
@@ -43,6 +41,9 @@ const SignupV2 = () => {
             }
             catch(err){
                 setErr("Kullanıcı kaydedilirken hata oluştu!");;
+            }
+            finally{
+                setLoading(false);
             }
         }
     };
@@ -129,12 +130,16 @@ const SignupV2 = () => {
 </div>
 
 
-                <button type="submit">
+                <button type="submit" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
-                    MECLISE KAYIT OL
+                    {loading ? (
+            <p className="spinner-border spinner-border-sm" style={{display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center"}} role="status" aria-hidden="true"></p>
+          ) : (
+            "MECLISE KAYIT OL"
+          )}
                 </button>
             </form>
         </div>
