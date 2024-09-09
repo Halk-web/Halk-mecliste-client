@@ -79,10 +79,11 @@ const PostCard = (props: any) => {
   // UTC tarih ve saati Türkiye saat dilimine dönüştürüp istenen formata çeviren fonksiyon
   function formatToTurkishDate(utcdateTime: any) {
     // Türkiye saat dilimine dönüştür
-    const localDateTime = utcToLocal(utcdateTime, 'Europe/Istanbul');
+    const formattedDate = utcToLocal(utcdateTime, 'Europe/Istanbul');
+    //const localDateTime = utcToLocal(utcdateTime, 'Europe/Istanbul');
     
     // Dönüştürülmüş tarihi moment ile formatlayın
-    const formattedDate = moment(localDateTime, 'YYYY-MM-DD HH:mm').format('DD MMMM YYYY HH.mm');
+    //const formattedDate = moment(localDateTime, 'YYYY-MM-DD HH:mm').format('DD MMMM YYYY HH.mm');
     
     // Türkçe ay isimlerini içeren sözlük
     const monthTranslations : { [key: string]: string }= {
