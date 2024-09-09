@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const LoginPage=()=>{
   const [email,setEmail]=useState<string>("");
   const [password,setPassword]=useState<string>("");
+   const [loading, setLoading] = useState<boolean>(false); 
   const [err,setErr]=useState<string|null>(null);
   const {login}=useAuth();
   const navigate=useNavigate();
@@ -20,6 +21,7 @@ const LoginPage=()=>{
 
   const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault();
+    setLoading(true);
 
     try{
       await login(email,password);
@@ -27,6 +29,9 @@ const LoginPage=()=>{
     }
     catch(error){
       setErr("Mecliste Böyle bir üye yok!");
+    }
+    finally{
+      setLoading(false);
     }
   }
   
@@ -43,12 +48,16 @@ const LoginPage=()=>{
         <div className="mb-3">
         <input type="password" className="form-control" id="floatingInput1" placeholder="ŞİFRE" onChange={(e:any)=>handlePasswordChange(e.target.value)}/>
         </div>
-      <button type="submit">
+      <button type="submit" style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-        GIRIS YAP
+        {loading ? (
+            <p className="spinner-border spinner-border-sm" style={{display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center"}} role="status" aria-hidden="true"></p>
+          ) : (
+            "GİRİŞ YAP"
+        )}
       </button>
     </form>
   </div>
