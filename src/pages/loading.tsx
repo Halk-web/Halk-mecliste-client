@@ -69,7 +69,6 @@ const Loading = () => {
                 </Col>
             </Row>
 
-            {isLoading && (
                 <div className="loader">
                     <div className="p-4 text-center">
                         <div className="custom-loader"></div>
@@ -77,7 +76,6 @@ const Loading = () => {
                         <p className="mb-0">Oturuma kısa süreliğine ara veriyoruz</p>
                     </div>
                 </div>
-            )}
 
         </React.Fragment>
     )
