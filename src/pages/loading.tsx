@@ -72,7 +72,7 @@ const Loading = () => {
                 <div className="loader">
                     <div className="p-4 text-center">
                         <div className="custom-loader"></div>
-                        <h2 className="my-3 f-w-400">Loading..</h2>
+                        <h2 className="my-3 f-w-400">Yükleniyor...</h2>
                         <p className="mb-0">Oturuma kısa süreliğine ara veriyoruz</p>
                     </div>
                 </div>
