@@ -78,33 +78,35 @@ const PostCard = (props: any) => {
   
   // UTC tarih ve saati Türkiye saat dilimine dönüştürüp istenen formata çeviren fonksiyon
   function formatToTurkishDate(utcdateTime: any) {
+  // Türkiye saat dilimine dönüştür
+  const localDateTime = moment.utc(utcdateTime).tz('Europe/Istanbul');
 
-    const localDateTime = utcToLocal(utcdateTime, 'Europe/Istanbul');
-    
-    // Dönüştürülmüş tarihi moment ile formatlayın
-    const formattedDate = moment(localDateTime, 'YYYY-MM-DD HH:mm').format('DD MMMM YYYY HH.mm');
-    
-    // Türkçe ay isimlerini içeren sözlük
-    const monthTranslations : { [key: string]: string }= {
-      'January': 'Ocak',
-      'February': 'Şubat',
-      'March': 'Mart',
-      'April': 'Nisan',
-      'May': 'Mayıs',
-      'June': 'Haziran',
-      'July': 'Temmuz',
-      'August': 'Ağustos',
-      'September': 'Eylül',
-      'October': 'Ekim',
-      'November': 'Kasım',
-      'December': 'Aralık'
-    };
-  
-    // Ay isimlerini İngilizce'den Türkçe'ye çevirin
-    const month = moment(formattedDate, 'DD MMMM YYYY HH.mm').format('MMMM');
-    const translatedMonth = month;
-    return formattedDate.replace(month, translatedMonth);
-  }
+  // Dönüştürülmüş tarihi moment ile formatla
+  const formattedDate = localDateTime.format('DD MMMM YYYY HH.mm');
+
+  // Türkçe ay isimlerini içeren sözlük
+  const monthTranslations: { [key: string]: string } = {
+    'January': 'Ocak',
+    'February': 'Şubat',
+    'March': 'Mart',
+    'April': 'Nisan',
+    'May': 'Mayıs',
+    'June': 'Haziran',
+    'July': 'Temmuz',
+    'August': 'Ağustos',
+    'September': 'Eylül',
+    'October': 'Ekim',
+    'November': 'Kasım',
+    'December': 'Aralık',
+  };
+
+  // Ay isimlerini İngilizce'den Türkçe'ye çevir
+  const month = localDateTime.format('MMMM');
+  const translatedMonth = monthTranslations[month] || month;
+
+  return formattedDate.replace(month, translatedMonth);
+}
+
 
   
   const handleLike = async () => {
