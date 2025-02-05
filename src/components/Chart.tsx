@@ -173,14 +173,14 @@ const ChartPiety = (props: any) => {
                     <div style={{ backgroundColor: 'white', width: '100%' }}>
                         <Modal.Header closeButton>
                             <Modal.Title id="contained-modal-title-vcenter">
-                                <h6>Oyların Dağılımı</h6>
+                                <h6>Tepkilerin Dağılımı</h6>
                             </Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <div style={{ flex: 1, marginRight: '10px' }}>
-                                        <h6>Cinsiyete göre Haklı bulanlar</h6>
+                                        <h6>Cinsiyete göre Beğenenler</h6>
                                         <ResponsiveContainer width="100%" height={400}>
                                             <PieChart>
                                                 <Pie
@@ -202,7 +202,7 @@ const ChartPiety = (props: any) => {
                                         </ResponsiveContainer>
                                     </div>
                                     <div style={{ flex: 1, marginLeft: '10px' }}>
-                                        <h6>Cinsiyete göre Haksız bulanlar</h6>
+                                        <h6>Cinsiyete göre Beğenmeyenler</h6>
                                         <ResponsiveContainer width="100%" height={400}>
                                             <PieChart>
                                                 <Pie
@@ -227,7 +227,7 @@ const ChartPiety = (props: any) => {
 
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div style={{ flex: 1, marginRight: '10px' }}>
-                        <h6>Partiye göre Haklı bulanlar</h6>
+                        <h6>Partiye göre Beğenenler</h6>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={partyVoteRight}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -240,7 +240,7 @@ const ChartPiety = (props: any) => {
                         </ResponsiveContainer>
                     </div>
                     <div style={{ flex: 1, marginLeft: '10px' }}>
-                        <h6>Partiye göre Haksız bulanlar</h6>
+                        <h6>Partiye göre Beğenmeyenler</h6>
                         <ResponsiveContainer width="100%" height={300}>
                             <BarChart data={partyVoteWrong}>
                                 <CartesianGrid strokeDasharray="3 3" />
@@ -256,7 +256,7 @@ const ChartPiety = (props: any) => {
 
                                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                     <div style={{ flex: 1, marginRight: '10px' }}>
-                                        <h6>Şehirlere göre Haklı bulanlar</h6>
+                                        <h6>Şehirlere göre Beğenenler</h6>
                                         <ResponsiveContainer width="100%" height={400}>
                                             <BarChart
                                                 data={cityVoteRight}
@@ -272,7 +272,7 @@ const ChartPiety = (props: any) => {
                                         </ResponsiveContainer>
                                     </div>
                                     <div style={{ flex: 1, marginLeft: '10px' }}>
-                                        <h6>Şehirlere göre Haksız bulanlar</h6>
+                                        <h6>Şehirlere göre Beğenmeyenler</h6>
                                         <ResponsiveContainer width="100%" height={400}>
                                             <BarChart
                                                 data={cityVoteWrong}
