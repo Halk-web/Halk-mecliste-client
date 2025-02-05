@@ -81,7 +81,7 @@ const CreatePostModal = (props: any) => {
             style={{ maxHeight: '80vh', overflowY: 'auto' }}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Yeni bir Oturum Başlat</Modal.Title>
+                <Modal.Title>Yeni Konu Başlat</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
