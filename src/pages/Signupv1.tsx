@@ -41,7 +41,7 @@ const SignupV1 = () => {
     return (
         <>
             <div className="login-box">
-            <h4 className="f-w-500 mb-1">MECLISE KAYDOL</h4>
+            <h4 className="f-w-500 mb-1">KAYDOL</h4>
 
                 <div style={{ color: "red", marginBottom: "15px" }}>{err ? err : ""}</div>
 
