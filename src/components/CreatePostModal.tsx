@@ -86,7 +86,7 @@ const CreatePostModal = (props: any) => {
             <Modal.Body>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Label>Yasa veya önerge başlığı</Form.Label>
+                        <Form.Label>Film veya parti başlığı</Form.Label>
                         <Form.Control type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                     </Form.Group>
 
@@ -96,12 +96,12 @@ const CreatePostModal = (props: any) => {
                     </Form.Group>
 
                     <Form.Group className="mb-3">
-                        <Form.Label>Yasa tanımı</Form.Label>
+                        <Form.Label>Tanımı</Form.Label>
                         <Form.Control as="textarea" rows={3} value={description} onChange={(e) => setDescription(e.target.value)}/>
                     </Form.Group>
 
                     <div className="d-flex justify-content-end">
-                        <Button variant="secondary" type="submit">Oturum Başlat</Button>
+                        <Button variant="secondary" type="submit">YAYINLA</Button>
                     </div>
                 </Form>
             </Modal.Body>
