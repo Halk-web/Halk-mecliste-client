@@ -1,3 +1,22 @@
 export const politicalViews = [
-    "Liberal", "Komünist", "İslamcı", "Atatürkçü", "Muhafazakâr", "Sosyal Demokrat", "Milliyetçi", "Feminist","Tarafsız"
-  ];
+    "Aksiyon",
+    "Komedi",
+    "Bilim Kurgu",
+    "Macera",
+    "Dram",
+    "Romantik",
+    "Gerilim",
+    "Korku",
+    "Fantastik",
+    "Animasyon",
+    "Belgesel",
+    "Müzikal",
+    "Suç",
+    "Psikolojik Gerilim",
+    "Savaş",
+    "Western",
+    "Aile",
+    "Tarih",
+    "Spor",
+    "Kara Mizah"
+];
