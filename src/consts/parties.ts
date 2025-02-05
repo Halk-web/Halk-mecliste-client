@@ -1,3 +1,17 @@
 export const parties = [
-    "AKP", "MHP", "CHP","İYİ PARTİ","SAADET PARTİSİ","DEM PARTİ","TİP","tarafsız"
-  ];
+    "Doğum Günü 🎂",
+    "Mezuniyet 🎓",
+    "Düğün/Nişan 💍",
+    "Bekarlığa Veda 🎉",
+    "Kostüm Partisi 🎭",
+    "Havuz Partisi 🏖️",
+    "Yılbaşı Partisi 🎄",
+    "Karaoke Gecesi 🎤",
+    "Barbekü Partisi 🍖",
+    "Film Gecesi 🎬",
+    "Oyun Gecesi 🎮",
+    "Kamp Partisi ⛺",
+    "Tema Partisi (80'ler, Hollywood vs.)",
+    "Sürpriz Parti 🎊",
+    "Tekne Partisi ⛵"
+];
