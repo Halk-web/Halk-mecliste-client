@@ -48,7 +48,7 @@ const TopBar = () => {
                                 <Dropdown.Menu className="pc-h-dropdown drp-search">
                                     <form className="px-3">
                                         <div className="form-group mb-0 d-flex align-items-center">
-                                            <input type="search" className="form-control border-0 shadow-none" placeholder="OTURUM ARA. . ." onChange={e=>{handleOnChange(e)}}/>
+                                            <input type="search" className="form-control border-0 shadow-none" placeholder="ARAMA YAP. . ." onChange={e=>{handleOnChange(e)}}/>
                                             <a className="btn btn-light-secondary btn-search" onClick={(e:any)=>handleOnClick()}>ARA</a>
                                         </div>
                                     </form>
@@ -57,7 +57,7 @@ const TopBar = () => {
                             <li className="pc-h-item d-none d-md-inline-flex">
                                 <form className="form-search">
                                     <i className="ph-duotone ph-magnifying-glass icon-search"></i>
-                                    <input type="search" className="form-control" placeholder="OTURUM Ara..." onChange={e=>{handleOnChange(e)}} />
+                                    <input type="search" className="form-control" placeholder="ARAMA YAP..." onChange={e=>{handleOnChange(e)}} />
                                     <a className="btn btn-search" style={{ padding: "0" }} onClick={(e:any)=>handleOnClick()}>ARA</a>
                                 </form>
                             </li>
@@ -80,7 +80,7 @@ const TopBar = () => {
                                             </Dropdown.Item>
                                             <Dropdown.Item onClick={(e:any)=>{setOpen(true)}} className="dropdown-item">
                                                 <i className="ph-duotone ph-sign-in"></i>
-                                                <span>Oturum başlat</span>
+                                                <span>YAYINLA</span>
                                             </Dropdown.Item>
                                             <Dropdown.Item href={`/profile/${user?.id}`} className="dropdown-item">
                                                 <i className="ph-duotone ph-user"></i>
@@ -110,10 +110,6 @@ const TopBar = () => {
                                     <i className="ph-duotone ph-house"></i>
                                         <span>Ana sayfa</span>
                                     </Dropdown.Item>
-                                    <Dropdown.Item href="/">
-                                        <i className="ph-duotone ph-buildings"></i>
-                                        <span>Meclis</span>
-                                    </Dropdown.Item>
                                     <Dropdown.Item href={`/profile/${user?.id}`}>
                                     <i className="ph-duotone ph-gear"></i>
                                         <span>Profilim</span>
@@ -124,7 +120,7 @@ const TopBar = () => {
                                     </Dropdown.Item>
                                     <Dropdown.Item onClick={(e:any)=>{setOpen(true)}} >
                                         <i className="ph-duotone ph-sign-in"></i>
-                                        <span>Oturum oluştur</span>
+                                        <span>YAYINLA</span>
                                     </Dropdown.Item>
                                     <Dropdown.Item onClick={(e:any)=>{handleLogout(e)}}>
                                         <i className="ph-duotone ph-power"></i>
