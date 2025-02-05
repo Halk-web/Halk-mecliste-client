@@ -50,7 +50,7 @@ const SignupV2 = () => {
 
     return (
         <div className="login-box">
-            <h4 className="f-w-500 mb-1">MECLISE KAYDI TAMAMLA</h4>
+            <h4 className="f-w-500 mb-1">KAYDI TAMAMLA</h4>
 
             <div style={{ color: "red", marginBottom: "15px" }}>
                 {err ? err : ""}
@@ -74,13 +74,13 @@ const SignupV2 = () => {
                 </div>
 
                 <div className="form-group ">
-                    <small>Siyasi Görüş</small>
+                    <small>Favori Türün</small>
                     <select 
                         className="form-control" 
                         value={politicalView} 
                         onChange={(e) => setPoliticalView(e.target.value)}
                     >
-                        <option value="">Bir siyasi görüş seçin</option>
+                        <option value="">Bir Tür Seçin</option>
                         {politicalViews.map((view, index) => (
                             <option key={index} value={view}>
                                 {view}
@@ -138,7 +138,7 @@ const SignupV2 = () => {
                     {loading ? (
             <p className="spinner-border spinner-border-sm" style={{display:"flex",alignItems:"center",justifyContent:"center",textAlign:"center"}} role="status" aria-hidden="true"></p>
           ) : (
-            "MECLISE KAYIT OL"
+            "KAYIT OL"
           )}
                 </button>
             </form>
