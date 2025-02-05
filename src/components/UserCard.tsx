@@ -54,7 +54,7 @@ const UserCards = () => {
                                         href={`/home/${item?.profile?.id}`}
                                         className="btn btn-outline-primary btn-sm ms-1"
                                     >
-                                        OTURUMLAR
+                                        POSTLAR
                                     </a>
                                 </div>
                             </div>
@@ -64,11 +64,11 @@ const UserCards = () => {
                                 </div>
                                 <div className="col-4">
                                     <h5 className="mb-0">{item?.numberOfPosts}</h5>
-                                    <small className="text-muted">oturum sayısı</small>
+                                    <small className="text-muted">post sayısı</small>
                                 </div>
                             </div>
                             <div className="saprator my-2">
-                                <span>SIYASI</span>
+                                <span>KİŞİSEL</span>
                             </div>
                             <div className="text-center">
                                 <span className="badge bg-light-secondary border rounded-pill border-secondary bg-transparent f-14 me-1 mt-1">
