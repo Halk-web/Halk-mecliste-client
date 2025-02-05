@@ -37,7 +37,7 @@ const TopBar = () => {
                         <ul className="list-unstyled">
                             <li className="pc-h-item pc-sidebar-collapse">
                                <h4 style={{ marginRight: "25px" }}>
-                                    HALK MECLISTE<h6><small>Neyin nesi Halkın Sesi</small></h6>
+                                    POSTALA<h6><small>Güncel,Film ve Müzik</small></h6>
                                 </h4>
                             </li>
                             <Dropdown as="li" className="pc-h-item d-inline-flex d-md-none">
