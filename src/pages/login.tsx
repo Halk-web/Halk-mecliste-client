@@ -40,7 +40,7 @@ const LoginPage=()=>{
         <div className="login-box">
         <h4 className="f-w-500 mb-1">Kullanıcı ismi ile giriş yap</h4>
         <h6 style={{color:"red"}}>{err ? err : ""}</h6>
-        <p className="mb-3">Hesabın Yok mu?<a href="/signup" className="link-primary ms-1">Meclise Gir</a></p>
+        <p className="mb-3">Hesabın Yok mu?<a href="/signup" className="link-primary ms-1">Kayıt Ol</a></p>
         <form onSubmit={handleSubmit}>
         <div className="mb-3">
         <input type="email" className="form-control"  placeholder="EMAIL" onChange={(e:any)=>handleEmailChange(e.target.value)} />
