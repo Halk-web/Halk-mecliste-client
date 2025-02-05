@@ -267,10 +267,10 @@ const handleOnSetUser=async()=>{
           </div>
           <div className="w-100 d-flex align-items-center mt-3">
             <span  className="btn btn-link-dark" onClick={handleLike}>
-              <i className={`ph-duotone ph-thumbs-up me-1 ${liked ? 'text-primary' : ''}`}></i> {likesCount}<small className="text-muted">Doğru Karar</small>
+              <i className={`ph-duotone ph-thumbs-up me-1 ${liked ? 'text-primary' : ''}`}></i> {likesCount}<small className="text-muted">Beğenme</small>
             </span>
             <span className="btn btn-link-dark" onClick={handleDislike}>
-              <i className={`ph-duotone ph-thumbs-up me-1 ${disliked ? 'text-danger' : ''}`}></i> {dislikesCount}<small className="text-muted">Yanlış Karar</small>
+              <i className={`ph-duotone ph-thumbs-up me-1 ${disliked ? 'text-danger' : ''}`}></i> {dislikesCount}<small className="text-muted">Beğenmeme</small>
             </span>
           </div>
         </Card.Footer>
