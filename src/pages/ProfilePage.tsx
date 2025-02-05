@@ -143,7 +143,7 @@ const ProfilePage = () => {
 
         <Card>
           <Card.Header>
-            <h5>SİYASİ KİMLİK</h5>
+            <h5>POSTALA DETAYLARI</h5>
           </Card.Header>
           <Card.Body>
             <ul className="list-group list-group-flush">
@@ -180,7 +180,7 @@ const ProfilePage = () => {
               <li className="list-group-item px-0">
               <Row>
                   <Col md={6}>
-                    <p className="mb-1 text-muted">SİYASİ GÖRÜŞ</p>
+                    <p className="mb-1 text-muted">Film Görüş</p>
                     {isEditing.politicalView ? (
                       <Form.Control
                         as="select"
